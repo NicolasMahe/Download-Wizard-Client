@@ -1,0 +1,1 @@
+angular.module('module', ['module_searchEngine', 'module_layout']);

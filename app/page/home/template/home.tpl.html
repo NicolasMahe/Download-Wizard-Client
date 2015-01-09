@@ -1,0 +1,23 @@
+<div class="container theme-showcase" role="main">
+
+    <sub-header-directive></sub-header-directive>
+    
+    
+    <div class="page-header">
+        <div ng-if="isLoadingArray" class="pull-right loading" style="line-height: 39px;">Loading<span style="vertical-align: middle;" class="glyphicon glyphicon-refresh"></span></div>
+        <h1>Search on IPTorrents</h1>
+    </div>
+
+    <form role="form" ng-submit="searchvalueset=searchvalue">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" class="form-control" ng-model="searchvalue" placeholder="Enter a search">
+            </div>
+        </div>
+    </form>
+
+    <directive-search-engine-search ng-if="searchvalueset" active-imdb="true" search-value="{{searchvalueset}}" limit-to="999" order-by=""></directive-search-engine-search>
+
+
+</div><!-- /container -->
