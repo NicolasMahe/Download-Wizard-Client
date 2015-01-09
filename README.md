@@ -1,4 +1,4 @@
-# Download-Wizard-Client
+# Download Wizard Client
 
 A wizard made for helping you in every day downloads.
 
