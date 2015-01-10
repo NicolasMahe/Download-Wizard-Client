@@ -3,7 +3,8 @@ angular.module('downloadWizard', [
   'page',
   'webservice',
   'module',
-  'config'
+  'config',
+  'service'
 ])
 .config(['$routeProvider', function($routeProvider) {
 	

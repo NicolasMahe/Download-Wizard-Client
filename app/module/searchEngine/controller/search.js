@@ -9,11 +9,12 @@ angular.module('module_searchEngine')
  * @param int limitTo
  * @param bool activeIMDb
  */
-.controller('module_searchEngine_search', function ($scope, webservice_searchEngine) {
+.controller('module_searchEngine_search', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata) {
           
     $scope.searchValueOld = "";
     $scope.result = null;
     $scope.isLoading = false;
+    $scope.metadata = {};
     
     $scope.search = function(search) {
         if(search != $scope.searchValueOld) {
@@ -22,14 +23,33 @@ angular.module('module_searchEngine')
                 $scope.searchValueOld = search;
                 $scope.result = response.data;
                 $scope.isLoading = false;
+                
+                angular.forEach($scope.result, function(torrent, key) {
+                    torrent.metadata = service_recognizeMetadata(torrent.title);
+                    
+                    //add metada
+                    if(torrent.metadata.title !== null) {
+                        metadataName = torrent.metadata.title.toLowerCase().replace(/\s+/g, '') + torrent.metadata.year;
+                        torrent.metadataName = metadataName;
+                        if($scope.metadata[metadataName] === undefined) {
+                            $scope.metadata[metadataName] = {"_meta" : torrent.metadata};
+                        }
+                    }
+                });
+                                
+                angular.forEach($scope.metadata, function(metadata, key) {
+                    if(metadata._meta) {
+                        webservice_metadata.get(metadata._meta.title).then(function(response) {
+                            $scope.metadata[key] = response.data;
+                        }, function(data) {
+                            console.log("error", data);
+                        });
+                    }
+                });
             }, function(data) {
                 console.log("error", data);
             });
         }
-    };
-    
-    $scope.showAll = function() {
-        $scope.trackerLimitTo = 999;
     };
     
     $scope.$watch(
