@@ -4,16 +4,6 @@
     
     <h1>Search on IPTorrents</h1>
 
-    <form role="form" ng-submit="searchvalueset=searchvalue">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-                <input type="text" class="form-control" ng-model="searchvalue" placeholder="Enter a search">
-            </div>
-        </div>
-    </form>
-
-    <directive-search-engine-result-table ng-if="searchvalueset" active-imdb="true" search-value="{{searchvalueset}}" limit-to="999" order-by=""></directive-search-engine-result-table>
-
-
+    <directive-search-engine-form-result-table></directive-search-engine-form-result-table>
+    
 </div><!-- /container -->
