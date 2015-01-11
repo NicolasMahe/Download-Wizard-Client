@@ -16,7 +16,7 @@ angular.module('module_searchEngine')
     $scope.loading = 0;
     
     $scope.search = function(search) {
-        if(search != $scope.searchValueOld) {
+        if(search != $scope.searchValueOld && search !== "") {
             $scope.loading++;
             webservice_searchEngine.search(search).then(function(response) {
                 $scope.searchValueOld = search;

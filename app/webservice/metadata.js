@@ -21,10 +21,9 @@ angular.module('webservice_metadata', [])
             }
             return $q.when(undefined);
 		},
-		get: function(searchValue) {
-			return $http.get('http://www.omdbapi.com/?t='+searchValue+'&y=&plot=short&r=json').then(function(response) {
+		get: function(searchValue, imdbID) {
+			return $http.get('http://www.omdbapi.com/?t='+searchValue+'&y=&i='+imdbID+'&plot=short&r=json').then(function(response) {
 
-				//transform the response data
 				if(response.data.Error) {
 					formated = {};
 				} else {
@@ -32,6 +31,7 @@ angular.module('webservice_metadata', [])
 						actors		: response.data.Actors,
 						country		: response.data.Country,
 						director	: response.data.Director,
+						plot		: response.data.Plot,
 						genre		: response.data.Genre,
 						language	: response.data.Language,
 						released	: response.data.Released,
@@ -49,6 +49,27 @@ angular.module('webservice_metadata', [])
 				}
 
 				return formated;
+			});
+		},
+		search: function(searchValue, imdbID) {
+			return $http.get('http://www.omdbapi.com/?s='+searchValue+'&r=json').then(function(response) {
+
+				var data = [];
+				if(!response.data.Error) {
+					angular.forEach(response.data.Search, function(result, key) {
+						var formated = {
+							title		: result.Title,
+							year		: parseInt(result.Year, 10),
+							imdbID		: result.imdbID,
+							type		: result.Type,
+							imdbUrl		: 'http://www.imdb.com/title/' + result.imdbID
+						};
+
+						data.push(formated);
+					});
+				}
+
+				return data;
 			});
 		}
 	};

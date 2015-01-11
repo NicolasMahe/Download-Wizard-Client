@@ -1,0 +1,1 @@
+angular.module('module_searchMeta', ['webservice_metadata']);

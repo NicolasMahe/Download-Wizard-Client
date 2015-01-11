@@ -1,1 +1,1 @@
-angular.module('page_home', ['module_searchEngine']);
+angular.module('page_home', ['module_searchEngine', 'module_searchMeta']);

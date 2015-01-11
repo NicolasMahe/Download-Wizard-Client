@@ -1,0 +1,29 @@
+<div>
+
+	<form role="form" ng-submit="searchvalueset=searchvalue">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" class="form-control" ng-model="searchvalue" placeholder="Enter a search">
+            </div>
+        </div>
+    </form>
+    
+    <directive-search-meta-result-table 
+    	search-value="{{searchvalueset}}" 
+    	selected-imdb-id="selectedImdbId">
+    </directive-search-meta-result-table>
+
+    <directive-search-meta-fiche
+    	imdb-id="{{selectedImdbId}}"
+    	detailed-data="detailDataImdb">
+    </directive-search-meta-fiche>
+
+    <directive-search-engine-result-table 
+        active-imdb="false" 
+        search-value="{{searchvalueForTorrent}}" 
+        limit-to="5" 
+        order-by="-completed">
+    </directive-search-engine-result-table>
+
+</div>
