@@ -38,6 +38,10 @@ angular.module('module_searchEngine')
             });
         }
     };
+
+    $scope.showAllResult = function() {
+        $scope.limitTo = 999;
+    };
     
     $scope.$watch(
         function() {
