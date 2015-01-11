@@ -13,16 +13,16 @@ angular.module('module_searchEngine')
           
     $scope.searchValueOld = "";
     $scope.result = null;
-    $scope.isLoading = false;
+    $scope.loading = 0;
     $scope.metadata = {};
     
     $scope.search = function(search) {
         if(search != $scope.searchValueOld) {
-            $scope.isLoading = true;
+            $scope.loading++;
             webservice_searchEngine.search(search).then(function(response) {
                 $scope.searchValueOld = search;
                 $scope.result = response.data;
-                $scope.isLoading = false;
+                $scope.loading--;
                 
                 angular.forEach($scope.result, function(torrent, key) {
                     torrent.recognizeMetadata = service_recognizeMetadata(torrent.title);
