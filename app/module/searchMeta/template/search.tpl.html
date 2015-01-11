@@ -1,18 +1,40 @@
 <div>
 
+    <script type="text/ng-template" id="customTemplate.html">
+        <a>
+            {{match.model.title}} ({{match.model.year}})
+            <span style="float:right; margin-left: 50px;">
+                {{match.model.type}}
+            </span>
+        </a>
+    </script>
+
 	<form role="form" ng-submit="searchvalueset=searchvalue">
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-                <input type="text" class="form-control" ng-model="searchvalue" placeholder="Enter a search">
+                <input 
+                    type="text"
+                    class="form-control" 
+                    ng-model="searchvalue" 
+                    placeholder="Enter a search"
+                    typeahead="title.title for title in search($viewValue)" 
+                    typeahead-loading="isTypeaheadLoading"
+                    typeahead-on-select="typeaheadSelect($item, $model, $label)"
+                    typeahead-template-url="customTemplate.html"
+                    typeahead-wait-ms="300" />
             </div>
         </div>
     </form>
     
+    <div ng-if="isTypeaheadLoading" class="text-center loading" style="width: 100%; line-height: 39px;">Loading<span style="vertical-align: middle;" class="glyphicon glyphicon-refresh"></span></div>
+    
+    <!--
     <directive-search-meta-result-table 
     	search-value="{{searchvalueset}}" 
     	selected-imdb-id="selectedImdbId">
     </directive-search-meta-result-table>
+    -->
 
     <directive-search-meta-fiche
     	imdb-id="{{selectedImdbId}}"

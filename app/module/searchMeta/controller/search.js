@@ -1,8 +1,7 @@
 angular.module('module_searchMeta')
 
-.controller('module_searchMeta_search', function ($scope) {
+.controller('module_searchMeta_search', function ($scope, webservice_metadata) {
     
-	//$scope.detailDataImdb = null;
 
     $scope.$watch(
         function() {
@@ -17,5 +16,14 @@ angular.module('module_searchMeta')
         }
     );
     
+    $scope.search = function(search) {
+        return webservice_metadata.search(search).then(function(data) {
+            return data;
+        });
+      };
+
+    $scope.typeaheadSelect = function(item, model, label) {
+        $scope.selectedImdbId = item.imdbID;
+    };
     
 });

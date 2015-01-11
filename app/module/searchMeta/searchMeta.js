@@ -1,1 +1,1 @@
-angular.module('module_searchMeta', ['webservice_metadata']);
+angular.module('module_searchMeta', ['webservice_metadata', 'ui.bootstrap']);
