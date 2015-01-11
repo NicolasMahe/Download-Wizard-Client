@@ -4,7 +4,8 @@ angular.module('downloadWizard', [
   'webservice',
   'module',
   'config',
-  'service'
+  'service',
+  'directive_responsiveClass'
 ])
 .config(['$routeProvider', function($routeProvider) {
 	

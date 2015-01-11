@@ -6,9 +6,8 @@ angular.module('module_layout')
 		templateUrl: '/app/module/layout/template/header.tpl.html',
                 link: function(scope) {
                     $('.navbar-collapse a').click(function() {
-                        console.log('TODO: improve collapse of the header for mobile only');
-                        $('.navbar-collapse').collapse('hide');
-                    })
+                        $('body.screen-xs .navbar-collapse').collapse('hide');
+                    });
                 }
 	};
 });

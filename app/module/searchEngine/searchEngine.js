@@ -1,1 +1,1 @@
-angular.module('module_searchEngine', ['filterBytes']);
+angular.module('module_searchEngine', ['filter_bytes']);
