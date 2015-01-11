@@ -1,11 +1,30 @@
 angular.module('webservice')
 
-.factory('webservice_metadata', function($http, config) {
-    return {
+.factory('webservice_metadata', function($q, $http, config) {
+
+	var cache = {};
+
+    var self = {
+		getFromRecognizeMetadata: function(metadata) {
+			if(metadata.title !== null) {
+                var metadataName = metadata.title.toLowerCase().replace(/\s+/g, '') + metadata.year;
+                if(cache[metadataName] === undefined) {
+					cache[metadataName] = self.get(metadata.title).then(function(data) {
+                        cache[metadataName] = data;
+						return data;
+                    }, function(data) {
+                        console.log("error", data);
+                    });
+                    return cache[metadataName];
+                }
+                return $q.when(cache[metadataName]);
+            }
+            return $q.when(undefined);
+		},
 		get: function(searchValue) {
 			return $http.get('http://www.omdbapi.com/?t='+searchValue+'&y=&plot=short&r=json').then(function(response) {
 
-				//transform the reponse data
+				//transform the response data
 				if(response.data.Error) {
 					formated = {};
 				} else {
@@ -29,10 +48,10 @@ angular.module('webservice')
 					};
 				}
 
-				response.data = formated;
-
-				return response;
+				return formated;
 			});
 		}
 	};
+
+	return self;
 });

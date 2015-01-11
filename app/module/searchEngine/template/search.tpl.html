@@ -38,8 +38,8 @@
                     </td>
                     <td style="vertical-align: middle;"><a ng-href="{{line.detail_link}}">{{line.title}}</a></td>
                     <td ng-if="activeIMDb" style="vertical-align: middle;" class="text-center">
-                        <a ng-if="metadata[line.metadataName].imdbID" href="{{metadata[line.metadataName].imdbUrl}}">
-                            <span class="label label-success">{{metadata[line.metadataName].imdbRating}}/10</span>
+                        <a ng-if="line.metadata.imdbID" href="{{line.metadata.imdbUrl}}">
+                            <span class="label label-success">{{line.metadata.imdbRating}}/10</span>
                         </a>
                     </td>
                     <td style="vertical-align: middle;" class="text-center">{{line.size | bytes}}</td>

@@ -25,26 +25,12 @@ angular.module('module_searchEngine')
                 $scope.isLoading = false;
                 
                 angular.forEach($scope.result, function(torrent, key) {
-                    torrent.metadata = service_recognizeMetadata(torrent.title);
-                    
-                    //add metada
-                    if(torrent.metadata.title !== null) {
-                        metadataName = torrent.metadata.title.toLowerCase().replace(/\s+/g, '') + torrent.metadata.year;
-                        torrent.metadataName = metadataName;
-                        if($scope.metadata[metadataName] === undefined) {
-                            $scope.metadata[metadataName] = {"_meta" : torrent.metadata};
-                        }
-                    }
-                });
-                                
-                angular.forEach($scope.metadata, function(metadata, key) {
-                    if(metadata._meta) {
-                        webservice_metadata.get(metadata._meta.title).then(function(response) {
-                            $scope.metadata[key] = response.data;
-                        }, function(data) {
-                            console.log("error", data);
-                        });
-                    }
+                    torrent.recognizeMetadata = service_recognizeMetadata(torrent.title);
+
+                    //add metadata
+                    webservice_metadata.getFromRecognizeMetadata(torrent.recognizeMetadata).then(function(data) {
+                        torrent.metadata = data;
+                    });
                 });
             }, function(data) {
                 console.log("error", data);
