@@ -13,7 +13,7 @@ angular.module('module_searchEngine')
             searchValue: '@searchValue',
             orderBy: '@orderBy',
             limitTo: '@limitTo',
-            activeIMDb: '@activeImdb'
+            activeIMDb: '=activeImdb'
         },
         controller: "module_searchEngine_resultTable",
         templateUrl: '/app/module/searchEngine/template/resultTable.tpl.html',
