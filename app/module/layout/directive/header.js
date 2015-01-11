@@ -1,6 +1,6 @@
 angular.module('module_layout')
 
-.directive('headerDirective', function() {
+.directive('directiveLayoutHeader', function() {
 	return {
 		restrict: 'E',
 		templateUrl: '/app/module/layout/template/header.tpl.html',

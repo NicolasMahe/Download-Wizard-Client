@@ -4,9 +4,9 @@ angular.module('module_searchEngine')
  * Search 'search-value' on the search engine and display a result table
  * 
  * Example:
- * <directive-search-engine-search active-imdb="true" search-value="{{searchvalueset}}" limit-to="999" order-by=""></directive-search-engine-search>
+ * <directive-search-engine-result-table active-imdb="true" search-value="{{searchvalueset}}" limit-to="999" order-by=""></directive-search-engine-result-table>
  */
-.directive('directiveSearchEngineSearch', function() {
+.directive('directiveSearchEngineResultTable', function() {
     return {
         restrict: 'E',
         scope: {
@@ -15,8 +15,8 @@ angular.module('module_searchEngine')
             limitTo: '@limitTo',
             activeIMDb: '@activeImdb'
         },
-        controller: "module_searchEngine_search",
-        templateUrl: '/app/module/searchEngine/template/search.tpl.html',
+        controller: "module_searchEngine_resultTable",
+        templateUrl: '/app/module/searchEngine/template/resultTable.tpl.html',
         link: function(scope) {
             
         }

@@ -1,4 +1,4 @@
-angular.module('service')
+angular.module('service_recognizeMetadata', [])
 
 .factory('service_recognizeMetadata', function() {
     return function(titleScene) {

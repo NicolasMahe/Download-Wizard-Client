@@ -1,4 +1,4 @@
-angular.module('webservice')
+angular.module('webservice_metadata', [])
 
 .factory('webservice_metadata', function($q, $http, config) {
 

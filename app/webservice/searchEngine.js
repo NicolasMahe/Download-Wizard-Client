@@ -1,4 +1,4 @@
-angular.module('webservice')
+angular.module('webservice_searchEngine', [])
 
 .factory('webservice_searchEngine', function($http, config) {
     return {

@@ -1,11 +1,18 @@
 angular.module('downloadWizard', [
-  'ngRoute',
-  'page',
-  'webservice',
-  'module',
-  'config',
-  'service',
-  'directive_responsiveClass'
+	//angular
+	'ngRoute',
+
+	//config
+	'config',
+
+	//directive
+	'directive_responsiveClass',
+
+	//module
+	'module_layout',
+
+	//page
+	'page_home'
 ])
 .config(['$routeProvider', function($routeProvider) {
 	

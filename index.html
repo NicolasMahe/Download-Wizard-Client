@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="apple-touch-startup-image" href="apple-startup-image.png" />
 
     <title>Download Wizard</title>
     
@@ -20,7 +18,7 @@
     <!-- jquery -->
     <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <!-- bootstrap -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link   href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- angular -->
     <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
@@ -30,9 +28,8 @@
     <script src="bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js" type="text/javascript"></script>
     
 
-
     <!-- app -->
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link   href="css/style.css" rel="stylesheet" type="text/css">
     <script src="app/bootstrap.js" type="text/javascript"></script>
     <script src="app/config.js" type="text/javascript"></script>
     
@@ -43,20 +40,17 @@
     <script src="app/filter/bytes.js" type="text/javascript"></script>
     
     <!-- service -->
-    <script src="app/service/service.js" type="text/javascript"></script>
     <script src="app/service/recognizeMetadata.js" type="text/javascript"></script>
     
     <!-- webservice -->
-    <script src="app/webservice/webservice.js" type="text/javascript"></script>
     <script src="app/webservice/searchEngine.js" type="text/javascript"></script>
     <script src="app/webservice/metadata.js" type="text/javascript"></script>
     
     <!-- module -->
-    <script src="app/module/module.js" type="text/javascript"></script>
     <!-- searchEngine -->
     <script src="app/module/searchEngine/searchEngine.js" type="text/javascript"></script>
-    <script src="app/module/searchEngine/controller/search.js" type="text/javascript"></script>
-    <script src="app/module/searchEngine/directive/search.js" type="text/javascript"></script>
+    <script src="app/module/searchEngine/controller/resultTable.js" type="text/javascript"></script>
+    <script src="app/module/searchEngine/directive/resultTable.js" type="text/javascript"></script>
     <!-- layout -->
     <script src="app/module/layout/layout.js" type="text/javascript"></script>
     <script src="app/module/layout/controller/header.js" type="text/javascript"></script>
@@ -64,14 +58,14 @@
     <script src="app/module/layout/directive/subHeader.js" type="text/javascript"></script>
     
     <!-- page -->
-    <script src="app/page/page.js" type="text/javascript"></script>
     <!-- home -->
+    <script src="app/page/home/home.js" type="text/javascript"></script>
     <script src="app/page/home/controller/home.js" type="text/javascript"></script>
 </head>
 
 <body directive-responsive-class>
 
-	<header-directive></header-directive>
+	<directive-layout-header></directive-layout-header>
 	
 	<div ng-view></div>
 

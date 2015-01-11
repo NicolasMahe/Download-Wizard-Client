@@ -1,7 +1,7 @@
 angular.module('module_searchEngine')
 
 /*
- * module_searchEngine_search
+ * module_searchEngine_resultTable
  * 
  * variable from the directive
  * @param var searchValue
@@ -9,7 +9,7 @@ angular.module('module_searchEngine')
  * @param int limitTo
  * @param bool activeIMDb
  */
-.controller('module_searchEngine_search', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata) {
+.controller('module_searchEngine_resultTable', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata) {
           
     $scope.searchValueOld = "";
     $scope.result = null;

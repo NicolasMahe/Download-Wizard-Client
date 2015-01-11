@@ -1,5 +1,5 @@
-
 angular.module('directive_responsiveClass', [])
+
 .directive('directiveResponsiveClass', function() {
     return {
         restrict: 'A',
@@ -28,7 +28,9 @@ angular.module('directive_responsiveClass', [])
             });
         }
     };
-}).directive('directiveResponsiveShowOnly', function(ngIfDirective) {
+})
+
+.directive('directiveResponsiveShowOnly', function(ngIfDirective) {
     //@TODO faire marcher le ng if lors de window resize
     var ngIf = ngIfDirective[0];
 
@@ -59,7 +61,9 @@ angular.module('directive_responsiveClass', [])
             });
         }
     };
-}).directive('directiveResponsiveShowNot', function(ngIfDirective) {
+})
+
+.directive('directiveResponsiveShowNot', function(ngIfDirective) {
     //@TODO faire marcher le ng if lors de window resize
     var ngIf = ngIfDirective[0];
 
