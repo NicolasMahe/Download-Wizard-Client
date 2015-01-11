@@ -11,10 +11,9 @@ angular.module('module_searchEngine')
  */
 .controller('module_searchEngine_resultTable', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata) {
           
-    $scope.searchValueOld = "";
+    var searchValueOld = "";
     $scope.result = null;
     $scope.loading = 0;
-    $scope.metadata = {};
     
     $scope.search = function(search) {
         if(search != $scope.searchValueOld) {
@@ -28,7 +27,9 @@ angular.module('module_searchEngine')
                     torrent.recognizeMetadata = service_recognizeMetadata(torrent.title);
 
                     //add metadata
+                    $scope.loading++;
                     webservice_metadata.getFromRecognizeMetadata(torrent.recognizeMetadata).then(function(data) {
+                        $scope.loading--;
                         torrent.metadata = data;
                     });
                 });
