@@ -1,0 +1,11 @@
+{
+  "name": "download-wizard-client",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.10.x"
+  },
+  "analyze": false,
+  "engines": {
+    "node": "v0.10.x"
+  }
+}
