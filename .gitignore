@@ -1,8 +1,11 @@
 #config file
-/app/config.js
+client/app/config.js
 
 #other
 /nbproject/
-/bower_components/
+client/bower_components/
 *.sublime-project
 *.sublime-workspace
+.DS_Store
+*~
+node_modules
