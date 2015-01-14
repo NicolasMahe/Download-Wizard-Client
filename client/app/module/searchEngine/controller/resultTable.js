@@ -9,7 +9,7 @@ angular.module('module_searchEngine')
  * @param int limitTo
  * @param bool activeIMDb
  */
-.controller('module_searchEngine_resultTable', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata) {
+.controller('module_searchEngine_resultTable', function ($scope, webservice_searchEngine, webservice_metadata, service_recognizeMetadata, webservice_downloadManager) {
           
     var searchValueOld = "";
     $scope.result = null;
@@ -26,17 +26,25 @@ angular.module('module_searchEngine')
                 angular.forEach($scope.result, function(torrent, key) {
                     torrent.recognizeMetadata = service_recognizeMetadata(torrent.title);
 
-                    //add metadata
-                    $scope.loading++;
-                    webservice_metadata.getFromRecognizeMetadata(torrent.recognizeMetadata).then(function(data) {
-                        $scope.loading--;
-                        torrent.metadata = data;
-                    });
+                    if($scope.activeIMDb) {
+                      //add metadata
+                      $scope.loading++;
+                      webservice_metadata.getFromRecognizeMetadata(torrent.recognizeMetadata).then(function(data) {
+                          $scope.loading--;
+                          torrent.metadata = data;
+                      });
+                    }
                 });
             }, function(data) {
                 console.log("error", data);
             });
         }
+    };
+    
+    $scope.download = function(result) {
+      webservice_downloadManager.addDownloadFromSearchHash(result.hash).then(function(response) {
+        console.log('download', response);
+      });
     };
 
     $scope.showAllResult = function() {
