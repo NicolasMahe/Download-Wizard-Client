@@ -46,7 +46,6 @@ angular.module('module_downloadManager')
       webservice_downloadManager.remove(torrent.id).success(function(data) {
         $('#module_downloadManager_torrentsTable_Modal_Info').modal('hide');
         $scope.loading--;
-        $scope.getAll();
       });
     }
   };
@@ -89,7 +88,6 @@ angular.module('module_downloadManager')
     if(!torrent_id) {
       return;
     }
-
     $scope.$apply(function() {
       delete $scope.torrents[torrent_id];
     });
