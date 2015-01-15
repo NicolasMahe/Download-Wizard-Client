@@ -41,9 +41,14 @@ angular.module('module_searchEngine')
         }
     };
     
-    $scope.download = function(result) {
-      webservice_downloadManager.addDownloadFromSearchHash(result.hash).then(function(response) {
-        console.log('download', response);
+    $scope.download = function(result, $event) {
+      var element = $event.target;
+      $(element).removeClass('glyphicon-download-alt glyphicon-remove text-danger glyphicon-ok text-success');
+        $(element).addClass('glyphicon-refresh rotate');
+      webservice_downloadManager.addDownloadFromSearchHash(result.hash).success(function(response) {
+        $(element).removeClass('glyphicon-refresh rotate').addClass('glyphicon-ok text-success');
+      }).error(function(response) {
+        $(element).removeClass('glyphicon-refresh rotate').addClass('glyphicon-remove text-danger');
       });
     };
 

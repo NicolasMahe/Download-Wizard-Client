@@ -1,0 +1,175 @@
+<div>
+    <div class="row">
+        <div class="col col-md-3">
+            <h1 style="margin-top: 0px">Torrents</h1>
+        </div>
+        <div class="col col-md-7 col-sm-7">
+            <div style="margin-top: 0px">
+                Downloaded : {{downloaded | bytes}} - Speed : {{download_speed | bytes}}/s.<br/>
+                Uploaded : {{uploaded | bytes}} - Speed : {{upload_speed | bytes}}/s</small>
+            </div>
+        </div>
+        <div class="col col-md-2 col-sm-2 col-xs-4 loading text-right">
+            <span ng-if="loading>0">Loading</span>
+            <span style="vertical-align: middle; cursor: pointer; font-size: 28px;"
+                  ng-click="getAll()"
+                  class="glyphicon glyphicon-refresh"
+                  ng-class="{'no-animation': loading==0}"
+                  ></span>
+        </div>
+    </div>
+    
+    <div ng-if="torrentList" class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Progress</th>
+                    <th>Size</th>
+                    <th>Dl Speed</th>
+                    <th>Up Speed</th>
+                    <th>Peers</th>
+                    <th>Downloaded</th>
+                    <th>Uploaded</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="torrent in torrentList" >
+                    <td style="vertical-align: middle; ">
+                      {{torrent.name}}
+                      <span class="glyphicon glyphicon-info-sign" 
+                            style="margin-left: 10px;"
+                            ng-click="showInfo(torrent)"
+                            title="Info">
+                      </span>
+                      <span class="glyphicon glyphicon-trash" 
+                            ng-click="remove(torrent)" 
+                            title="Remove torrent">  
+                      </span>
+                    </td>
+                    <td style="vertical-align: middle; width: 14em;">
+                        <div class="progress">
+                            <div class="progress-bar"  ng-class="{'progress-bar-success': (torrent.progress == 1), '': (torrent.progress < 1)}" role="progressbar" aria-valuenow="{{torrent.progress * 100}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 40px; width: {{torrent.progress * 100}}%">
+                                {{ torrent.progress * 100 | number:2 }}%
+                            </div>
+                        </div>
+                    </td>
+                    <td style="vertical-align: middle;">{{torrent.length | bytes}}</td>
+                    <td style="vertical-align: middle;">{{torrent.download_speed | bytes}}/s</td>
+                    <td style="vertical-align: middle;">{{torrent.upload_speed | bytes}}/s</td>
+                    <td style="vertical-align: middle;">{{torrent.number_peers}}</td>
+                    <td style="vertical-align: middle;">{{torrent.downloaded | bytes}}</td>
+                    <td style="vertical-align: middle;">{{torrent.uploaded | bytes}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center" ng-if="torrents.length == 0">No item</div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="module_downloadManager_torrentsTable_Modal_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+                Informations about : {{torrentInfo.name}}
+            </h4>
+          </div>
+
+            <div class="modal-body">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" ng-init="tabActive=0">
+                    <li ng-class="{'active': tabActive==0}"><a ng-click="tabActive=0">Info</a></li>
+                    <li ng-class="{'active': tabActive==1}"><a ng-click="tabActive=1">Peers</a></li>
+                    <li ng-class="{'active': tabActive==2}"><a ng-click="tabActive=2">Files</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div ng-class="{'active': tabActive==0}" class="tab-pane">
+                    
+                        <br/>
+                        <p><strong>Id : </strong>{{torrentInfo.id}}</p>
+                        <p><strong>Name : </strong>{{torrentInfo.name}}</p>
+                        <p><strong>Size : </strong>{{torrentInfo.length | bytes}}</p>
+                        <p><strong>Share ratio : </strong>{{torrentInfo.ratio}}</p>
+                        <p><strong>Downloaded : </strong>{{torrentInfo.downloaded | bytes}}</p>
+                        <p><strong>Uploaded : </strong>{{torrentInfo.uploaded | bytes}}</p>
+                        <p><strong>Number of peers : </strong>{{torrentInfo.number_peers}}</p>
+                        <p><strong>Number of connections : </strong>{{torrentInfo.number_connections}}</p>
+                    
+                    </div>
+                    <div ng-class="{'active': tabActive==1}" class="tab-pane">
+                    
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Address</th>
+                                        <th>Active</th>
+                                        <th>Is seeder</th>
+                                        <th>Downloaded</th>
+                                        <th>Uploaded</th>
+                                        <th>Download speed</th>
+                                        <th>Upload speed</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="peer in torrentInfo.peers">
+                                        <td style="vertical-align: middle;">{{peer.peer_id}}</td>
+                                        <td style="vertical-align: middle;">{{peer.remote_address}}</td>
+                                        <td style="vertical-align: middle;">{{tracker.active}}</td>
+                                        <td style="vertical-align: middle;">{{tracker.is_seeder}}</td>
+                                        <td style="vertical-align: middle;">{{tracker.downloaded | bytes}}</td>
+                                        <td style="vertical-align: middle;">{{tracker.uploaded | bytes}}</td>
+                                        <td style="vertical-align: middle;">{{tracker.download_speed | bytes}}/s</td>
+                                        <td style="vertical-align: middle;">{{tracker.upload_speed | bytes}}/s</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div ng-class="{'active': tabActive==2}" class="tab-pane">
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Path</th>
+                                        <th>Size</th>
+                                        <th>Done</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="file in torrentInfo.files">
+                                        <td style="vertical-align: middle;">{{file.name}}</td>
+                                        <td style="vertical-align: middle;">{{file.path}}</td>
+                                        <td style="vertical-align: middle;">{{file.length | bytes}}</td>
+                                        <td style="vertical-align: middle;">{{file.done}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left glyphicon glyphicon-trash" title="Remove torrent" ng-click="remove(torrentInfo)"></button>
+              
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+</div>

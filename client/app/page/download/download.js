@@ -1,0 +1,1 @@
+angular.module('page_download', ['module_downloadManager']);

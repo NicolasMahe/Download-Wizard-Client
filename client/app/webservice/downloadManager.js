@@ -9,10 +9,10 @@ angular.module('webservice_downloadManager', [])
       return $http.put(config.backend.url + 'download/torrent/' + hash);
     },
     get: function (id) {
-      return $http.get(config.backend.url + 'download/torrent/' + hash);
+      return $http.get(config.backend.url + 'download/torrent/' + id);
     },
-    remove: function (hash) {
-      return $http.delete(config.backend.url + 'download/torrent/' + hash);
+    remove: function (id) {
+      return $http.delete(config.backend.url + 'download/torrent/' + id);
     }
   };
 });
