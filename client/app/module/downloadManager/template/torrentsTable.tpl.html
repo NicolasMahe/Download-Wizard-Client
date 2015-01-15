@@ -18,8 +18,8 @@
                   ></span>
         </div>
     </div>
-    
-    <div ng-if="torrentList" class="table-responsive">
+
+    <div ng-if="torrents" class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -35,7 +35,7 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="torrent in torrentList" >
+                <tr ng-repeat="(id, torrent) in torrents" >
                     <td style="vertical-align: middle; ">
                       {{torrent.name}}
                       <span class="glyphicon glyphicon-info-sign" 
@@ -75,7 +75,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="myModalLabel">
-                Informations about : {{torrentInfo.name}}
+                Informations about : {{torrents[torrentInfo].name}}
             </h4>
           </div>
 
@@ -91,14 +91,14 @@
                     <div ng-class="{'active': tabActive==0}" class="tab-pane">
                     
                         <br/>
-                        <p><strong>Id : </strong>{{torrentInfo.id}}</p>
-                        <p><strong>Name : </strong>{{torrentInfo.name}}</p>
-                        <p><strong>Size : </strong>{{torrentInfo.length | bytes}}</p>
-                        <p><strong>Share ratio : </strong>{{torrentInfo.ratio}}</p>
-                        <p><strong>Downloaded : </strong>{{torrentInfo.downloaded | bytes}}</p>
-                        <p><strong>Uploaded : </strong>{{torrentInfo.uploaded | bytes}}</p>
-                        <p><strong>Number of peers : </strong>{{torrentInfo.number_peers}}</p>
-                        <p><strong>Number of connections : </strong>{{torrentInfo.number_connections}}</p>
+                        <p><strong>Id : </strong>{{torrents[torrentInfo].id}}</p>
+                        <p><strong>Name : </strong>{{torrents[torrentInfo].name}}</p>
+                        <p><strong>Size : </strong>{{torrents[torrentInfo].length | bytes}}</p>
+                        <p><strong>Share ratio : </strong>{{torrents[torrentInfo].ratio}}</p>
+                        <p><strong>Downloaded : </strong>{{torrents[torrentInfo].downloaded | bytes}}</p>
+                        <p><strong>Uploaded : </strong>{{torrents[torrentInfo].uploaded | bytes}}</p>
+                        <p><strong>Number of peers : </strong>{{torrents[torrentInfo].number_peers}}</p>
+                        <p><strong>Number of connections : </strong>{{torrents[torrentInfo].number_connections}}</p>
                     
                     </div>
                     <div ng-class="{'active': tabActive==1}" class="tab-pane">
@@ -119,7 +119,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr ng-repeat="peer in torrentInfo.peers">
+                                    <tr ng-repeat="peer in torrents[torrentInfo].peers">
                                         <td style="vertical-align: middle;">{{peer.peer_id}}</td>
                                         <td style="vertical-align: middle;">{{peer.remote_address}}</td>
                                         <td style="vertical-align: middle;">{{peer.active}}</td>
@@ -148,7 +148,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr ng-repeat="file in torrentInfo.files">
+                                    <tr ng-repeat="file in torrents[torrentInfo].files">
                                         <td style="vertical-align: middle;">{{file.name}}</td>
                                         <td style="vertical-align: middle;">{{file.path}}</td>
                                         <td style="vertical-align: middle;">{{file.length | bytes}}</td>
@@ -164,7 +164,7 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default pull-left glyphicon glyphicon-trash" title="Remove torrent" ng-click="remove(torrentInfo)"></button>
+              <button type="button" class="btn btn-default pull-left glyphicon glyphicon-trash" title="Remove torrent" ng-click="remove(torrents[torrentInfo])"></button>
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
