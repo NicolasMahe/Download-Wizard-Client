@@ -122,12 +122,12 @@
                                     <tr ng-repeat="peer in torrentInfo.peers">
                                         <td style="vertical-align: middle;">{{peer.peer_id}}</td>
                                         <td style="vertical-align: middle;">{{peer.remote_address}}</td>
-                                        <td style="vertical-align: middle;">{{tracker.active}}</td>
-                                        <td style="vertical-align: middle;">{{tracker.is_seeder}}</td>
-                                        <td style="vertical-align: middle;">{{tracker.downloaded | bytes}}</td>
-                                        <td style="vertical-align: middle;">{{tracker.uploaded | bytes}}</td>
-                                        <td style="vertical-align: middle;">{{tracker.download_speed | bytes}}/s</td>
-                                        <td style="vertical-align: middle;">{{tracker.upload_speed | bytes}}/s</td>
+                                        <td style="vertical-align: middle;">{{peer.active}}</td>
+                                        <td style="vertical-align: middle;">{{peer.is_seeder}}</td>
+                                        <td style="vertical-align: middle;">{{peer.downloaded | bytes}}</td>
+                                        <td style="vertical-align: middle;">{{peer.uploaded | bytes}}</td>
+                                        <td style="vertical-align: middle;">{{peer.download_speed | bytes}}/s</td>
+                                        <td style="vertical-align: middle;">{{peer.upload_speed | bytes}}/s</td>
                                     </tr>
                                 </tbody>
                             </table>
