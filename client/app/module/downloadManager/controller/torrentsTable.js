@@ -1,5 +1,29 @@
 angular.module('module_downloadManager')
 
+.factory('$localeDurations', [function () {
+  return {
+    'one': {
+      year: '{} year',
+      month: '{} month',
+      week: '{} week',
+      day: '{} day',
+      hour: '{}h',
+      minute: '{}m',
+      second: '{}s',
+      millisecond: '{} millisecond'
+    },
+    'other': {
+      year: '{} years',
+      month: '{} months',
+      week: '{} weeks',
+      day: '{} days',
+      hour: '{}h',
+      minute: '{}m',
+      second: '{}s',
+      millisecond: '{} milliseconds'
+    }
+  };
+}])
 /*
  * module_downloadManager_torrentsTable
  */
@@ -12,6 +36,7 @@ angular.module('module_downloadManager')
   $scope.update_torrent = function(torrent) {
     $scope.torrents[torrent.id] = torrent;
     torrent.progress = torrent.downloaded / torrent.length;
+    torrent.remaining_time = (torrent.length - torrent.downloaded) / torrent.download_speed;
     torrent.last_update = Date.now();
 
     $scope.downloaded = 0;
