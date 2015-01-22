@@ -66,7 +66,7 @@
                     <td style="vertical-align: middle;">{{torrent.downloaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.uploaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.remaining_time | duration:'second':'minute'}}</td>
-                    <td style="vertical-align: middle;">{{torrent.created_time | date:'yy-MM-dd hh:mm'}}</td>
+                    <td style="vertical-align: middle;">{{torrent.created_time | date:'yy-MM-dd HH:mm'}}</td>
                 </tr>
             </tbody>
         </table>
@@ -98,7 +98,7 @@
                     
                         <br/>
                         <p><strong>Id : </strong>{{torrents[torrentInfo].id}}</p>
-                        <p><strong>Created time : </strong>{{torrents[torrentInfo].created_time | date:'yy-MM-dd hh:mm'}}</p>
+                        <p><strong>Created time : </strong>{{torrents[torrentInfo].created_time | date:'yy-MM-dd HH:mm'}}</p>
                         <p><strong>Name : </strong>{{torrents[torrentInfo].name}}</p>
                         <p><strong>Size : </strong>{{torrents[torrentInfo].length | bytes}}</p>
                         <p><strong>Progress : </strong>{{torrents[torrentInfo].progress * 100 | number:2}} %</p>
