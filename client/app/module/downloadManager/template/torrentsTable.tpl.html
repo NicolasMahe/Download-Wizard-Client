@@ -23,20 +23,22 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Progress</th>
-                    <th>Size</th>
-                    <th>Dl Speed</th>
-                    <th>Up Speed</th>
-                    <th>Peers</th>
-                    <th>Downloaded</th>
-                    <th>Uploaded</th>
-                    <th>Remaining Time</th>
+                    <th ng-click="orderBy=(orderBy !== 'name' ? 'name' : '-name')">Name</th>
+                    <th ng-click="orderBy=(orderBy !== 'progress' ? 'progress' : '-progress')">Progress</th>
+                    <th ng-click="orderBy=(orderBy !== 'length' ? 'length' : '-length')">Size</th>
+                    <th ng-click="orderBy=(orderBy !== 'download_speed' ? 'download_speed' : '-download_speed')">Dl Speed</th>
+                    <th ng-click="orderBy=(orderBy !== 'upload_speed' ? 'upload_speed' : '-upload_speed')">Up Speed</th>
+                    <th ng-click="orderBy=(orderBy !== 'swarm.seeders' ? 'swarm.seeders' : '-swarm.seeders')">Seeds</th>
+                    <th ng-click="orderBy=(orderBy !== 'swarm.leechers' ? 'swarm.leechers' : '-swarm.leechers')">Peers</th>
+                    <th ng-click="orderBy=(orderBy !== 'downloaded' ? 'downloaded' : '-downloaded')">Downloaded</th>
+                    <th ng-click="orderBy=(orderBy !== 'uploaded' ? 'uploaded' : '-uploaded')">Uploaded</th>
+                    <th ng-click="orderBy=(orderBy !== 'remaining_time' ? 'remaining_time' : '-remaining_time')">Remaining Time</th>
+                    <th ng-click="orderBy=(orderBy !== 'created_time' ? 'created_time' : '-created_time')">Created time</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr ng-repeat="(id, torrent) in torrents" >
+                <tr ng-repeat="(id, torrent) in torrents | orderBy:orderBy" >
                     <td style="vertical-align: middle; ">
                       {{torrent.name}}
                       <span class="glyphicon glyphicon-info-sign" 
@@ -59,10 +61,12 @@
                     <td style="vertical-align: middle;">{{torrent.length | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.download_speed | bytes}}/s</td>
                     <td style="vertical-align: middle;">{{torrent.upload_speed | bytes}}/s</td>
-                    <td style="vertical-align: middle;">{{torrent.number_peers}}</td>
+                    <td style="vertical-align: middle;">{{torrent.swarm.active_peers}} ({{torrent.swarm.seeders}})</td>
+                    <td style="vertical-align: middle;">({{torrent.swarm.leechers}})</td>
                     <td style="vertical-align: middle;">{{torrent.downloaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.uploaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.remaining_time | duration:'second':'minute'}}</td>
+                    <td style="vertical-align: middle;">{{torrent.created_time | date}}</td>
                 </tr>
             </tbody>
         </table>

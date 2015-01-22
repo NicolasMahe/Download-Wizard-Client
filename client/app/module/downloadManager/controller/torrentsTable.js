@@ -32,6 +32,8 @@ angular.module('module_downloadManager')
 
   $scope.torrentInfo = null;
   $scope.loading = 0;
+  
+  $scope.orderBy = '-created_time';
 
   $scope.update_torrent = function(torrent) {
     $scope.torrents[torrent.id] = torrent;
