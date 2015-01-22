@@ -38,7 +38,7 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="(id, torrent) in torrents | orderBy:orderBy" >
+                <tr ng-repeat="(id, torrent) in torrents | toArray | orderBy:orderBy" >
                     <td style="vertical-align: middle; ">
                       {{torrent.name}}
                       <span class="glyphicon glyphicon-info-sign" 
@@ -66,7 +66,7 @@
                     <td style="vertical-align: middle;">{{torrent.downloaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.uploaded | bytes}}</td>
                     <td style="vertical-align: middle;">{{torrent.remaining_time | duration:'second':'minute'}}</td>
-                    <td style="vertical-align: middle;">{{torrent.created_time | date}}</td>
+                    <td style="vertical-align: middle;">{{torrent.created_time | date:'yy-MM-dd hh:mm'}}</td>
                 </tr>
             </tbody>
         </table>
@@ -98,7 +98,7 @@
                     
                         <br/>
                         <p><strong>Id : </strong>{{torrents[torrentInfo].id}}</p>
-                        <p><strong>Created time : </strong>{{torrents[torrentInfo].created_time | date}}</p>
+                        <p><strong>Created time : </strong>{{torrents[torrentInfo].created_time | date:'yy-MM-dd hh:mm'}}</p>
                         <p><strong>Name : </strong>{{torrents[torrentInfo].name}}</p>
                         <p><strong>Size : </strong>{{torrents[torrentInfo].length | bytes}}</p>
                         <p><strong>Progress : </strong>{{torrents[torrentInfo].progress * 100 | number:2}} %</p>
