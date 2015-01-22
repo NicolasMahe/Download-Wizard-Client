@@ -98,6 +98,7 @@
                     
                         <br/>
                         <p><strong>Id : </strong>{{torrents[torrentInfo].id}}</p>
+                        <p><strong>Created time : </strong>{{torrents[torrentInfo].created_time | date}}</p>
                         <p><strong>Name : </strong>{{torrents[torrentInfo].name}}</p>
                         <p><strong>Size : </strong>{{torrents[torrentInfo].length | bytes}}</p>
                         <p><strong>Progress : </strong>{{torrents[torrentInfo].progress * 100 | number:2}} %</p>
@@ -106,8 +107,11 @@
                         <p><strong>Share ratio : </strong>{{torrents[torrentInfo].ratio}}</p>
                         <p><strong>Downloaded : </strong>{{torrents[torrentInfo].downloaded | bytes}}</p>
                         <p><strong>Uploaded : </strong>{{torrents[torrentInfo].uploaded | bytes}}</p>
-                        <p><strong>Number of peers : </strong>{{torrents[torrentInfo].number_peers}}</p>
-                        <p><strong>Number of connections : </strong>{{torrents[torrentInfo].number_connections}}</p>
+                        <p><strong>Active peers : </strong>{{torrents[torrentInfo].swarm.active_peers}}</p>
+                        <p><strong>Connected peers : </strong>{{torrents[torrentInfo].swarm.connected_peers}}</p>
+                        <p><strong>Queued peers : </strong>{{torrents[torrentInfo].swarm.queued_peers}}</p>
+                        <p><strong>Seeders : </strong>{{torrents[torrentInfo].swarm.seeders}}</p>
+                        <p><strong>Peers : </strong>{{torrents[torrentInfo].swarm.leechers}}</p>
                     
                     </div>
                     <div ng-class="{'active': tabActive==1}" class="tab-pane">
@@ -128,7 +132,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr ng-repeat="peer in torrents[torrentInfo].peers">
+                                    <tr ng-repeat="peer in torrents[torrentInfo].swarm.peers">
                                         <td style="vertical-align: middle;">{{peer.peer_id}}</td>
                                         <td style="vertical-align: middle;">{{peer.remote_address}}</td>
                                         <td style="vertical-align: middle;">{{peer.active}}</td>
