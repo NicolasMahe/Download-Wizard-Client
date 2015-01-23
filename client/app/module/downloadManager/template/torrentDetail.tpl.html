@@ -1,0 +1,105 @@
+<div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" ng-init="tabActive=0">
+        <li ng-class="{'active': tabActive==0}"><a ng-click="tabActive=0">Info</a></li>
+        <li ng-class="{'active': tabActive==1}"><a ng-click="tabActive=1">Peers</a></li>
+        <li ng-class="{'active': tabActive==2}"><a ng-click="tabActive=2">Files</a></li>
+    </ul>
+    <div class="tab-content">
+        <div ng-class="{'active': tabActive==0}" class="tab-pane">
+
+            <br/>
+            <div class="progress">
+                <div class="progress-bar"  ng-class="{'progress-bar-warning': (torrent.ready == 0), 'progress-bar-success': (torrent.progress == 1)}" role="progressbar" aria-valuenow="{{torrent.progress * 100}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 40px; width: {{torrent.progress * 100}}%">
+                    {{ torrent.progress * 100 | number:2 }}%
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-6">
+                <p><strong>Id : </strong>{{torrent.id}}</p>
+                <p><strong>Created time : </strong>{{torrent.created_time | date:'yy-MM-dd HH:mm'}}</p>
+                <p><strong>Name : </strong>{{torrent.name}}</p>
+                <p><strong>Size : </strong>{{torrent.length | bytes}}</p>
+                <p><strong>Progress : </strong>{{torrent.progress * 100 | number:2}} %</p>
+                <p><strong>Remaining time : </strong>{{torrent.remaining_time | duration:'second':'minute'}}</p>
+                <p><strong>Ready : </strong>{{torrent.ready}}</p>
+                <p><strong>Download speed : </strong>{{torrent.download_speed | bytes}}/s</p>
+                <p><strong>Upload speed : </strong>{{torrent.upload_speed | bytes}}/s</p>
+              </div>
+              <div class="col-sm-6">
+                <p><strong>Share ratio : </strong>{{torrent.ratio | number:2}}</p>
+                <p><strong>Downloaded : </strong>{{torrent.downloaded | bytes}}</p>
+                <p><strong>Uploaded : </strong>{{torrent.uploaded | bytes}}</p>
+                <p><strong>Active peers : </strong>{{torrent.swarm.active_peers}}</p>
+                <p><strong>Connected peers : </strong>{{torrent.swarm.connected_peers}}</p>
+                <p><strong>Queued peers : </strong>{{torrent.swarm.queued_peers}}</p>
+                <p><strong>Seeders : </strong>{{torrent.swarm.seeders}}</p>
+                <p><strong>Peers : </strong>{{torrent.swarm.leechers}}</p>
+              </div>
+            </div>
+            
+            
+
+        </div>
+        <div ng-class="{'active': tabActive==1}" class="tab-pane">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Address</th>
+                            <th>Active</th>
+                            <th>Is seeder</th>
+                            <th>Downloaded</th>
+                            <th>Uploaded</th>
+                            <th>Download speed</th>
+                            <th>Upload speed</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="peer in torrent.swarm.peers">
+                            <td style="vertical-align: middle;">{{peer.peer_id}}</td>
+                            <td style="vertical-align: middle;">{{peer.remote_address}}</td>
+                            <td style="vertical-align: middle;">{{peer.active}}</td>
+                            <td style="vertical-align: middle;">{{peer.is_seeder}}</td>
+                            <td style="vertical-align: middle;">{{peer.downloaded | bytes}}</td>
+                            <td style="vertical-align: middle;">{{peer.uploaded | bytes}}</td>
+                            <td style="vertical-align: middle;">{{peer.download_speed | bytes}}/s</td>
+                            <td style="vertical-align: middle;">{{peer.upload_speed | bytes}}/s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div ng-class="{'active': tabActive==2}" class="tab-pane">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Path</th>
+                            <th>Size</th>
+                            <th>Done</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="file in torrent.files">
+                            <td style="vertical-align: middle;">{{file.name}}</td>
+                            <td style="vertical-align: middle;">{{file.path}}</td>
+                            <td style="vertical-align: middle;">{{file.length | bytes}}</td>
+                            <td style="vertical-align: middle;">{{file.done}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
