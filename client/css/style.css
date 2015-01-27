@@ -155,3 +155,30 @@ body {
 /*directive-search-meta-search .dropdown-menu {
     width: calc(100% - 39px);
 }*/
+
+
+
+/* UPLOAD */
+div[ng-file-drop] {
+    background-color: #eee;
+    border: 1px solid darkgray;
+    height: 100%;
+    width: 100%;
+    min-height: 150px;
+    display: table;
+    font-size: x-large;
+    border-radius: 6px;
+}
+div[ng-file-drop] div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+div.accept[ng-file-drop] {
+    border-color: darkgreen;
+    background-color: #dff0d8;
+}
+div.reject[ng-file-drop] {
+    border-color: darkred;
+    background-color: #f2dede;
+}

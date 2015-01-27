@@ -28,6 +28,7 @@ angular.module('module_downloadManager')
  * module_downloadManager_torrentsTable
  */
 .controller('module_downloadManager_torrentsTable', function ($scope, webservice_downloadManager, config) {
+
   $scope.torrents = {}; // A dictionnary of torrents
 
   $scope.torrentInfo = null;
@@ -91,6 +92,14 @@ angular.module('module_downloadManager')
     else {
       $('#module_downloadManager_torrentsTable_Modal_Info').modal('show');
     }
+  };
+
+  $scope.showAdd = function() {
+    $('#module_downloadManager_torrentsTable_Modal_Add').modal('show');
+  };
+
+  $scope.addTorrentSuccess = function() {
+    $('#module_downloadManager_torrentsTable_Modal_Add').modal('hide');
   };
 
   /* Launch first update */

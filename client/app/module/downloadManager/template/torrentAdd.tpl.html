@@ -1,0 +1,10 @@
+<div>
+  <div class="btn btn-primary btn-lg btn-block" ng-file-select ng-model="files" ng-multiple="true" accept="">Select torrent files</div>
+  <br/>
+  <div ng-file-drop ng-model="files"
+             drag-over-class="{accept:'accept', reject:'reject', delay:0}"
+                    multiple="true"
+                   allow-dir="false" accept="">
+        <div class="vertical-align-middle">Drop torrent files here</div>
+  </div>
+</div>

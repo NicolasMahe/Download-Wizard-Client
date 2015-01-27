@@ -1,15 +1,11 @@
 <div>
     <div class="row">
-        <div class="col col-md-3">
-            <h1 style="margin-top: 0px">Torrents</h1>
+        <div class="col col-xs-4">
+            <h1 style="margin-top: 0px">Torrents
+              <button class="btn btn-default" type="submit" ng-click="showAdd()">Add torrent files</button>
+            </h1>
         </div>
-        <div class="col col-md-7 col-sm-7">
-            <div style="margin-top: 0px">
-                Downloaded : {{downloaded | bytes}} - Speed : {{download_speed | bytes}}/s.<br/>
-                Uploaded : {{uploaded | bytes}} - Speed : {{upload_speed | bytes}}/s</small>
-            </div>
-        </div>
-        <div class="col col-md-2 col-sm-2 col-xs-4 loading text-right">
+        <div class="col col-xs-8 loading text-right">
             <span ng-if="loading>0">Loading</span>
             <span style="vertical-align: middle; cursor: pointer; font-size: 28px;"
                   ng-click="getAll()"
@@ -73,8 +69,13 @@
     </div>
 
     <div class="text-center" ng-if="torrents.length == 0">No item</div>
+
+    <div>
+      Downloaded : {{downloaded | bytes}} - Speed : {{download_speed | bytes}}/s<br/>
+      Uploaded : {{uploaded | bytes}} - Speed : {{upload_speed | bytes}}/s
+    </div>
     
-    <!-- Modal -->
+    <!-- Modal detail -->
     <div class="modal fade" id="module_downloadManager_torrentsTable_Modal_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -94,6 +95,32 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left glyphicon glyphicon-trash" title="Remove torrent" ng-click="remove(torrents[torrentInfo])"></button>
               
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal add -->
+    <div class="modal fade" id="module_downloadManager_torrentsTable_Modal_Add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md   <a href=" "></a>">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+                Add torrent files
+            </h4>
+          </div>
+
+            <div class="modal-body">
+
+              <directive-download-manager-torrent-add success-function="addTorrentSuccess"></directive-download-manager-torrent-add>
+              
+            </div>
+
+            <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
 
